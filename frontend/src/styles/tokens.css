@@ -1,0 +1,90 @@
+:root {
+  /* ==========================================================================
+     COLOR SYSTEM — ESPRESSO, PARCHMENT & CARAMEL
+     ========================================================================== */
+  --color-espresso: #35231e;
+  --color-dark-roast: #241713;
+  --color-roasted-cocoa: #65483b;
+  --color-coffee-bean: #80624f;
+  --color-caramel: #b9875b;
+  --color-caramel-hover: #a3734a;
+  --color-caramel-subtle: #f7ede3;
+  --color-caramel-border: #e3c4a8;
+
+  --color-oat-milk: #f5efe5;
+  --color-oat-milk-subtle: #faf5ed;
+  --color-paper: #fffcf7;
+  --color-paper-pure: #ffffff;
+
+  --color-sand: #e8dccb;
+  --color-sand-light: #f2e9dc;
+  --color-sand-border: #dfd1bd;
+
+  --color-taupe: #857365;
+  --color-taupe-light: #97877a;
+  --color-taupe-muted: #b0a397;
+
+  --color-forest-green: #42644c;
+  --color-forest-green-bg: #eef5f0;
+  --color-forest-green-border: #c3d9c8;
+
+  --color-burnt-terracotta: #a84f3d;
+  --color-burnt-terracotta-hover: #914130;
+  --color-burnt-terracotta-bg: #fdf2f0;
+  --color-burnt-terracotta-border: #e8bcbb;
+
+  /* Focus & Accessibility */
+  --focus-ring: 0 0 0 2px var(--color-paper), 0 0 0 4px var(--color-caramel);
+  --focus-ring-danger: 0 0 0 2px var(--color-paper), 0 0 0 4px var(--color-burnt-terracotta);
+
+  /* ==========================================================================
+     TYPOGRAPHY
+     ========================================================================== */
+  --font-serif: 'DM Serif Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Cascadia Code', Consolas, Menlo, monospace;
+
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.84375rem;  /* 13.5px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-md: 1.0625rem;   /* 17px */
+  --text-lg: 1.25rem;     /* 20px */
+  --text-xl: 1.5rem;      /* 24px */
+  --text-2xl: 1.875rem;   /* 30px */
+  --text-3xl: 2.25rem;    /* 36px */
+  --text-4xl: 2.75rem;    /* 44px */
+
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+
+  /* ==========================================================================
+     ELEVATION & SURFACES
+     ========================================================================== */
+  --shadow-paper: 0 1px 3px rgba(53, 35, 30, 0.04), 0 4px 12px rgba(53, 35, 30, 0.05);
+  --shadow-float: 0 4px 20px rgba(53, 35, 30, 0.08), 0 1px 4px rgba(53, 35, 30, 0.04);
+  --shadow-modal: 0 20px 48px rgba(36, 23, 19, 0.16), 0 4px 12px rgba(36, 23, 19, 0.08);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     MOTION & TRANSITIONS
+     ========================================================================== */
+  --ease-warm: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 150ms var(--ease-warm);
+  --transition-base: 220ms var(--ease-warm);
+  --transition-slow: 350ms var(--ease-warm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms !important;
+    --transition-base: 0ms !important;
+    --transition-slow: 0ms !important;
+  }
+}
