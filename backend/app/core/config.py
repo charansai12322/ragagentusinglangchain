@@ -34,7 +34,13 @@ class Settings(BaseSettings):
     APP_ENV: str = Field(default="development", description="Environment: development, staging, production")
     LOG_LEVEL: str = Field(default="INFO", description="Log level: DEBUG, INFO, WARNING, ERROR")
     CORS_ORIGINS: list[str] = Field(
-        default_factory=lambda: ["http://localhost:5173", "http://localhost:3000"],
+        default_factory=lambda: [
+            "https://ragagentusinglangchain.vercel.app",
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+        ],
         description="Allowed origins for CORS",
     )
 
@@ -65,17 +71,38 @@ class Settings(BaseSettings):
     @classmethod
     def parse_cors_origins(cls, value: Any) -> list[str]:
         """Support both JSON strings and Python lists for CORS_ORIGINS."""
+        parsed: list[str] = []
         if isinstance(value, str):
             value = value.strip()
             if value.startswith("[") and value.endswith("]"):
                 try:
-                    return json.loads(value)
+                    loaded = json.loads(value)
+                    if isinstance(loaded, list):
+                        parsed = [str(origin).strip().rstrip("/") for origin in loaded if str(origin).strip()]
                 except Exception:
                     pass
-            return [origin.strip() for origin in value.split(",") if origin.strip()]
-        if isinstance(value, list):
-            return value
-        return ["http://localhost:5173", "http://localhost:3000"]
+            if not parsed:
+                parsed = [origin.strip().rstrip("/") for origin in value.split(",") if origin.strip()]
+        elif isinstance(value, list):
+            parsed = [str(origin).strip().rstrip("/") for origin in value if str(origin).strip()]
+
+        origins = (
+            parsed
+            if parsed
+            else [
+                "https://ragagentusinglangchain.vercel.app",
+                "http://localhost:5173",
+                "http://127.0.0.1:5173",
+                "http://localhost:3000",
+                "http://127.0.0.1:3000",
+            ]
+        )
+
+        # Always guarantee the production Vercel frontend origin is allowed
+        if "https://ragagentusinglangchain.vercel.app" not in origins:
+            origins.append("https://ragagentusinglangchain.vercel.app")
+
+        return origins
 
     @property
     def max_upload_size_bytes(self) -> int:
